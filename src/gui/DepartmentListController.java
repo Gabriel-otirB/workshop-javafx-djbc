@@ -103,14 +103,14 @@ public class DepartmentListController implements Initializable, DataChangeListen
 			controller.updateFormData();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Enter department data");
+			dialogStage.setTitle("Enter Department data");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.showAndWait();
 		} catch (IOException e) {
-			Alerts.showAlert("Io Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
+			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
 	}
 
@@ -158,16 +158,16 @@ public class DepartmentListController implements Initializable, DataChangeListen
 
 	private void removeEntity(Department obj) {
 		Optional<ButtonType> result = Alerts.showConfirmation("Confirmation", "Are you sure to delete?");
-		
-		if(result.get() == ButtonType.OK) {
-			if(service == null) {
+
+		if (result.get() == ButtonType.OK) {
+			if (service == null) {
 				throw new IllegalStateException("Service was null");
 			}
 			try {
-			service.remove(obj);
-			updateTableView();
+				service.remove(obj);
+				updateTableView();
 			}
-			catch(DbIntegrityException e) {
+			catch (DbIntegrityException e) {
 				Alerts.showAlert("Error removing object", null, e.getMessage(), AlertType.ERROR);
 			}
 		}
